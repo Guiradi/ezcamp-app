@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import {View, Image, TextInput, TouchableOpacity, Text} from 'react-native';
 
-import logo from './src/assets/images/logo.png';
+import logo from '../assets/images/logo.png';
 
 export default () => {
   const [username, setUsername] = useState('');

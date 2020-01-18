@@ -3,13 +3,17 @@ import {View, Image, TextInput, TouchableOpacity, Text} from 'react-native';
 
 import logo from '../assets/images/logo.png';
 
+import api from '../store/api';
+
 export default ({navigation: {navigate}}) => {
   const [username, setUsername] = useState('');
 
-  const onSubmit = useCallback(() => {
-    // TODO try to authenticate
-    navigate('main');
-  }, [navigate]);
+  const onSubmit = useCallback(async () => {
+    const {
+      data: {_id: id},
+    } = await api.post('/devs', {username});
+    navigate('main', {id});
+  }, [navigate, username]);
 
   return (
     <View

@@ -1,12 +1,29 @@
-import React, {useCallback} from 'react';
-import {View, Image, TouchableOpacity} from 'react-native';
+import React, {useCallback, useState, useEffect} from 'react';
+import {View, Image, TouchableOpacity, Text} from 'react-native';
 
 import logo from '../assets/images/logo.png';
 
-export default ({navigation: {navigate}}) => {
+import api from '../store/api';
+
+export default ({navigation: {navigate, getParam}}) => {
+  const [users, setUsers] = useState([]);
+
+  const id = getParam('id');
+
   const onLogout = useCallback(() => {
     navigate('login');
   }, [navigate]);
+
+  const loadUsers = () =>
+    useCallback(async () => {
+      const {data} = await api.get('/devs', {headers: {user: id}});
+
+      setUsers(data);
+    }, [id]);
+
+  useEffect(() => {
+    loadUsers();
+  }, [loadUsers]);
 
   return (
     <View

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {View, Image, TextInput, TouchableOpacity, Text} from 'react-native';
 
 import logo from './src/assets/images/logo.png';
@@ -6,7 +6,11 @@ import logo from './src/assets/images/logo.png';
 export default () => {
   const [username, setUsername] = useState('');
 
-  console.log(username);
+  const onSubmit = useCallback(() => {
+    // TODO try to authenticate
+    // TODO navigate to main screen
+    console.log(username);
+  }, [username]);
 
   return (
     <View
@@ -34,6 +38,7 @@ export default () => {
         }}
       />
       <TouchableOpacity
+        onPress={onSubmit}
         style={{
           marginTop: 10,
           height: 45,
